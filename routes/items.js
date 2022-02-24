@@ -12,6 +12,21 @@ let jwtValidationOptions = {}
 jwtValidationOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken()
 jwtValidationOptions.secretOrKey = secrets.jwtSignKey
 
+const Ajv = require('ajv')
+const ajv = new Ajv()
+const itemSchema = require('../schemas/item.schema.json')
+
+const itemInfoValidator = ajv.compile(itemSchema)
+const itemInfoValidateMw = function (req, res, next) {
+    const validationResult = itemInfoValidator(req.body)
+    if(validationResult) {
+        next()
+    }
+    else {
+        res.sendStatus(400)
+    }
+}
+
 passport.use(new JwtStrategy(jwtValidationOptions, function(jwt_payload, done) {
   const user = users.find(u => u.id == jwt_payload.userId)
   done(null, user)
@@ -39,7 +54,7 @@ router.get('/:id', (req, res) => {
     } 
 })
 
-router.put('/:id', passport.authenticate("jwt", {session: false}), (req, res) => {
+router.put('/:id', passport.authenticate("jwt", {session: false}), itemInfoValidateMw, (req, res) => {
     let foundItem = items.find(t => t.id == req.params.id)
     if(foundItem){
         foundItem.title = req.body.title,
@@ -69,25 +84,19 @@ router.delete('/:id', passport.authenticate("jwt", {session: false}), (req, res)
     } 
 })
 
-router.post('/', passport.authenticate("jwt", {session: false}), (req, res) => {
-    // check if request has more than 4 images
-    if(Object.keys(req.body.images).length <= 4){
-        items.push({
-            id: uuidv4(),
-            title: req.body.title,
-            category: req.body.category,
-            location: req.body.location,
-            images: req.body.images,
-            price: req.body.price,
-            dateOfPosting: req.body.dateOfPosting,
-            delivery: req.body.delivery,
-            seller: req.body.seller
-          })  
-          res.sendStatus(201);
-    }
-    else {
-        res.status(400).send("Max 4 images")
-    }
+router.post('/', passport.authenticate("jwt", {session: false}), itemInfoValidateMw, (req, res) => {
+    items.push({
+        id: uuidv4(),
+        title: req.body.title,
+        category: req.body.category,
+        location: req.body.location,
+        images: req.body.images,
+        price: req.body.price,
+        dateOfPosting: req.body.dateOfPosting,
+        delivery: req.body.delivery,
+        seller: req.body.seller
+    })  
+    res.sendStatus(201);
 })
 
 const cloudinary = require('cloudinary').v2;

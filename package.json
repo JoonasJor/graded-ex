@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/bobtheburgerflipper/graded-ex#readme",
   "dependencies": {
+    "ajv": "^8.10.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.2",
     "cloudinary": "^1.28.1",
