@@ -5,7 +5,7 @@ const items = require("./routes/items.js")
 const users = require("./routes/users.js")
 
 const app = express()
-const port = 3000
+const port = process.env.PORT || 8080
 
 
 app.use(bodyParser.json())
