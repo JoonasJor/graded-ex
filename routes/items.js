@@ -70,19 +70,24 @@ router.delete('/:id', passport.authenticate("jwt", {session: false}), (req, res)
 })
 
 router.post('/', passport.authenticate("jwt", {session: false}), (req, res) => {
-    items.push({
-      id: uuidv4(),
-      title: req.body.title,
-      category: req.body.category,
-      location: req.body.location,
-      images: req.body.images,
-      price: req.body.price,
-      dateOfPosting: req.body.dateOfPosting,
-      delivery: req.body.delivery,
-      seller: req.body.seller
-    })
-
-    res.sendStatus(201);
+    // check if request has more than 4 images
+    if(Object.keys(req.body.images).length <= 4){
+        items.push({
+            id: uuidv4(),
+            title: req.body.title,
+            category: req.body.category,
+            location: req.body.location,
+            images: req.body.images,
+            price: req.body.price,
+            dateOfPosting: req.body.dateOfPosting,
+            delivery: req.body.delivery,
+            seller: req.body.seller
+          })  
+          res.sendStatus(201);
+    }
+    else {
+        res.status(400).send("Max 4 images")
+    }
 })
 
 const cloudinary = require('cloudinary').v2;
