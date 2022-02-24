@@ -85,4 +85,26 @@ router.post('/', passport.authenticate("jwt", {session: false}), (req, res) => {
     res.sendStatus(201);
 })
 
+const cloudinary = require('cloudinary');
+const cloudinaryStorage = require('multer-storage-cloudinary');
+const multer = require('multer');
+
+// Config cloudinary storage for multer-storage-cloudinary
+const storage = cloudinaryStorage({
+    cloudinary: cloudinary,
+    folder: '', // give cloudinary folder where you want to store images
+    allowedFormats: ['jpg', 'png'],
+});
+
+const parser = multer({ storage: storage });
+
+// POST route for reciving the uploads. multer-parser will handle the incoming data based on the 'image' key
+// Once multer has completed the upload to cloudinary, it will come to the handling function
+// below, which then sends the 201 (CREATED) response. Notice that error handling has not been properly implemented.
+router.post('/upload', parser.single('image'), function (req, res) {
+    console.log(req.file);
+    res.status(201);
+    res.json(req.file);
+});
+
 module.exports = router
