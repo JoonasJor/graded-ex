@@ -96,9 +96,9 @@ cloudinary.config({
 });
 
 // Config cloudinary storage for multer-storage-cloudinary
-const storage = cloudinaryStorage({
+const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
-    folder: '', // give cloudinary folder where you want to store images
+    folder: 'bci', // give cloudinary folder where you want to store images
     allowedFormats: ['jpg', 'png'],
 });
 
