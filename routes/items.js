@@ -85,7 +85,7 @@ router.post('/', passport.authenticate("jwt", {session: false}), (req, res) => {
     res.sendStatus(201);
 })
 
-const cloudinary = require('cloudinary');
+const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const multer = require('multer')
 
@@ -99,10 +99,11 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
-        folder: '/bci',
-        allowedFormats: ['jpg', 'png']
-    }
-})
+      folder: 'some-folder-name',
+      format: async (req, file) => 'png', // supports promises as well
+      public_id: (req, file) => 'computed-filename-using-request',
+    },
+  });
   
 var parser = multer({ storage: storage })
   
