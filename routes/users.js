@@ -4,28 +4,10 @@ const { v4: uuidv4 } = require('uuid');
 const bcrypt = require("bcryptjs")
 const passport = require("passport")
 const basicStrategy = require("passport-http").BasicStrategy
+const users = require('../data/users')
 
 
-const users = [
-    {
-        "id": uuidv4(),
-        "firstName": "Paavo",
-        "lastName": "Pesusieni",
-        "email": "sieni@gmail.com",
-        "phoneNumber": "0441234567",
-        "password": "paavosieni68"
-    },
-    {
-        "id": uuidv4(),
-        "firstName": "Teppo",
-        "lastName": "Tapani",
-        "email": "tapani@gmail.com",
-        "phoneNumber": "0447654321",
-        "password": "tapanisieni46"
-    }
-]
-
-router.get('/', passport.authenticate("basic", {session: false}), (req, res) => {
+router.get('/', passport.authenticate("jwt", {session: false}), (req, res) => {
     res.json(users)
 })
 
@@ -41,7 +23,6 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-
     const salt = bcrypt.genSaltSync(6)
     const hashedPassword = bcrypt.hashSync(req.body.password, salt)
   
@@ -72,8 +53,20 @@ passport.use(new basicStrategy(
     }
 ))
 
+const jwt = require('jsonwebtoken')
+const secrets = require('../secrets.json')
+
 router.post('/login', passport.authenticate("basic", {session: false}), (req, res) => {
-    res.send("login successful")
+    // generate and return JWT upon succesful login
+    // we use the token for future authentication
+    const payloadData = {
+        foo: "bar",
+        hops: "pops",
+        userId: req.user.id
+    }
+    const token = jwt.sign(payloadData, secrets.jwtSignKey)
+
+    res.json({token: token})
 })
 
 module.exports = router
