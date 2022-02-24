@@ -63,7 +63,6 @@ router.get('/:id', (req, res) => {
 router.put('/:id', (req, res) => {
     let foundItem = items.find(t => t.id == req.params.id);
     if(foundItem){
-        //foundItem.id = items.length,
         foundItem.title = req.body.title,
         foundItem.category = req.body.category,
         foundItem.location = req.body.location,

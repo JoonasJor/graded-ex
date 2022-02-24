@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require("bcryptjs")
+const passport = require("passport")
+const basicStrategy = require("passport-http").BasicStrategy
 
 
 const users = [
@@ -10,6 +12,7 @@ const users = [
         "firstName": "Paavo",
         "lastName": "Pesusieni",
         "email": "sieni@gmail.com",
+        "phoneNumber": "0441234567",
         "password": "paavosieni68"
     },
     {
@@ -17,11 +20,12 @@ const users = [
         "firstName": "Teppo",
         "lastName": "Tapani",
         "email": "tapani@gmail.com",
+        "phoneNumber": "0447654321",
         "password": "tapanisieni46"
     }
 ]
 
-router.get('/', (req, res) => {
+router.get('/', passport.authenticate("basic", {session: false}), (req, res) => {
     res.json(users)
 })
 
@@ -46,11 +50,30 @@ router.post('/', (req, res) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
+      phoneNumber: req.body.phoneNumber,
       password: hashedPassword      
     } 
     users.push(user)
 
     res.sendStatus(201)
+})
+
+passport.use(new basicStrategy(
+    function(username, password, done) {
+  
+        console.log(username + " " + password)
+        let user = users.find(user => (user.email == username) && (bcrypt.compareSync(password, user.password)))
+        if(user != undefined){
+            done(null, user)
+        }
+        else{
+            done(null, false)
+        }
+    }
+))
+
+router.post('/login', passport.authenticate("basic", {session: false}), (req, res) => {
+    res.send("login successful")
 })
 
 module.exports = router
