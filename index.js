@@ -1,12 +1,13 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const { v4: uuidv4 } = require('uuid');
 
 const app = express()
 const port = 3000
 
 const items = [
     {
-        "id": 0,
+        "id": uuidv4(),
         "title": "komia polkupyörä",
         "category": "Polkupyörät",
         "location": "Oulu",
@@ -25,7 +26,7 @@ const items = [
         }
     },
     {
-        "id": 1,
+        "id": uuidv4(),
         "title": "nahkarukkaset",
         "category": "Ulkovaatteet",
         "location": "Myyrmäki",
@@ -45,10 +46,31 @@ const items = [
     }
 ]
 
+const users = [
+    {
+        "id": uuidv4(),
+        "firstName": "Paavo",
+        "lastName": "Pesusieni",
+        "email": "sieni@gmail.com",
+        "password": "paavosieni68",
+    },
+    {
+        "id": uuidv4(),
+        "firstName": "Teppo",
+        "lastName": "Tapani",
+        "email": "tapani@gmail.com",
+        "password": "tapanisieni46",
+    }
+]
+
 app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
     res.send("Hello World!")
+})
+
+app.get('/users', (req, res) => {
+    res.json(users)
 })
 
 app.get('/items', (req, res) => {
@@ -69,7 +91,7 @@ app.get('/items/:id', (req, res) => {
 app.put('/items/:id', (req, res) => {
     let foundItem = items.find(t => t.id == req.params.id);
     if(foundItem){
-        foundItem.id = items.length,
+        //foundItem.id = items.length,
         foundItem.title = req.body.title,
         foundItem.category = req.body.category,
         foundItem.location = req.body.location,
@@ -99,7 +121,7 @@ app.delete('/items/:id', (req, res) => {
 
 app.post('/items', (req, res) => {
     items.push({
-      id: items.length,
+      id: uuidv4(),
       title: req.body.title,
       category: req.body.category,
       location: req.body.location,

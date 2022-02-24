@@ -18,6 +18,8 @@
   "homepage": "https://github.com/bobtheburgerflipper/graded-ex#readme",
   "dependencies": {
     "body-parser": "^1.19.2",
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "router": "^1.3.6",
+    "uuid": "^8.3.2"
   }
 }
