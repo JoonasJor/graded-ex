@@ -5,16 +5,12 @@ const items = require('../data/items-data')
 const users = require('../data/users-data')
 
 //const secrets = require('../secrets.json')
-const aws = require('aws-sdk');
-let s3 = new aws.S3({
-    jwtSignKey: process.env.jwtSignKey
-  })
 const passport = require("passport")
 const JwtStrategy = require('passport-jwt').Strategy,
       ExtractJwt = require('passport-jwt').ExtractJwt
 let jwtValidationOptions = {}
 jwtValidationOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken()
-jwtValidationOptions.secretOrKey = s3.jwtSignKey
+jwtValidationOptions.secretOrKey = "supersecretkey123"
 
 const Ajv = require('ajv')
 const ajv = new Ajv()
