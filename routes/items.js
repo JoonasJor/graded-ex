@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const { v4: uuidv4 } = require('uuid')
-const items = require('../data/items')
-const users = require('../data/users')
+const items = require('../data/items-data')
+const users = require('../data/users-data')
 
 const secrets = require('../secrets.json')
 const passport = require("passport")
@@ -23,7 +23,10 @@ const itemInfoValidateMw = function (req, res, next) {
         next()
     }
     else {
-        res.sendStatus(400)
+        res.status(400).json({
+            errorDescription: itemInfoValidator.errors[0].message,
+            errorinfo: itemInfoValidator.errors[0].instancePath
+        })
     }
 }
 
@@ -85,8 +88,9 @@ router.delete('/:id', passport.authenticate("jwt", {session: false}), (req, res)
 })
 
 router.post('/', passport.authenticate("jwt", {session: false}), itemInfoValidateMw, (req, res) => {
+    const itemId = uuidv4()
     items.push({
-        id: uuidv4(),
+        id: itemId,
         title: req.body.title,
         category: req.body.category,
         location: req.body.location,
@@ -95,8 +99,8 @@ router.post('/', passport.authenticate("jwt", {session: false}), itemInfoValidat
         dateOfPosting: req.body.dateOfPosting,
         delivery: req.body.delivery,
         seller: req.body.seller
-    })  
-    res.sendStatus(201);
+    })
+    res.status(201).json({id: itemId})
 })
 
 const cloudinary = require('cloudinary').v2;
@@ -113,20 +117,30 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
-      folder: 'some-folder-name',
-      format: async (req, file) => 'png', // supports promises as well
-      public_id: (req, file) => 'computed-filename-using-request',
+      folder: 'Uploads',
+      format: async (req, file) => 'jpg',
+      public_id: (req, file) => uuidv4(),
     },
   });
   
-var parser = multer({ storage: storage })
+var parser = multer({ storage: storage }).array("image", 4)
   
 // POST route for reciving the uploads. multer-parser will handle the incoming data based on the 'image' key
 // Once multer has completed the upload to cloudinary, it will come to the handling function
-// below, which then sends the 201 (CREATED) response. Notice that error handling has not been properly implemented.
-router.post('/upload', parser.single('image'), function (req, res) {
-    console.log(req.file)
-    res.json(req.file)
+router.post('/upload',function(req,res){
+    parser(req,res,function(err) {
+        if(req.files){
+            
+            if(err) {
+                res.status(400).send("Error uploading file(s)")
+            }
+            else{
+                console.log(req.files)
+                res.sendStatus(200)
+            }  
+        }
+        else{ res.sendStatus(400) }  
+    })
 })
 
 module.exports = router

@@ -1,0 +1,113 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://localhost/userArray.json",
+    "type": "array",
+    "title": "user array schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": [],
+    "examples": [
+        [
+            {
+                "id": "fd946945-5e98-4f1e-a14a-6753923156c9",
+                "firstName": "Matti",
+                "lastName": "Muoniola",
+                "email": "matt@gmail.com",
+                "phoneNumber": "0447456123",
+                "password": "maunulankukkasadot"
+            }
+        ]
+    ],
+    "items": {
+        "$id": "#/items",
+        "anyOf": [
+            {
+                "$id": "#/items/anyOf/0",
+                "type": "object",
+                "title": "The first anyOf schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": {},
+                "examples": [
+                    {
+                        "id": "fd946945-5e98-4f1e-a14a-6753923156c9",
+                        "firstName": "Matti",
+                        "lastName": "Muoniola",
+                        "email": "matt@gmail.com",
+                        "phoneNumber": "0447456123",
+                        "password": "maunulankukkasadot"
+                    }
+                ],
+                "required": [
+                    "id",
+                    "firstName",
+                    "lastName",
+                    "email",
+                    "phoneNumber",
+                    "password"
+                ],
+                "properties": {
+                    "id": {
+                        "$id": "#/items/anyOf/0/properties/id",
+                        "type": "string",
+                        "title": "The id schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "fd946945-5e98-4f1e-a14a-6753923156c9"
+                        ]
+                    },
+                    "firstName": {
+                        "$id": "#/items/anyOf/0/properties/firstName",
+                        "type": "string",
+                        "title": "The firstName schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "Matti"
+                        ]
+                    },
+                    "lastName": {
+                        "$id": "#/items/anyOf/0/properties/lastName",
+                        "type": "string",
+                        "title": "The lastName schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "Muoniola"
+                        ]
+                    },
+                    "email": {
+                        "$id": "#/items/anyOf/0/properties/email",
+                        "type": "string",
+                        "title": "The email schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "matt@gmail.com"
+                        ]
+                    },
+                    "phoneNumber": {
+                        "$id": "#/items/anyOf/0/properties/phoneNumber",
+                        "type": "string",
+                        "title": "The phoneNumber schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "0447456123"
+                        ]
+                    },
+                    "password": {
+                        "$id": "#/items/anyOf/0/properties/password",
+                        "type": "string",
+                        "title": "The password schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "maunulankukkasadot"
+                        ]
+                    }
+                },
+                "additionalProperties": false
+            }
+        ]
+    }
+}

@@ -1,0 +1,278 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://localhost/itemArray.json",
+    "type": "array",
+    "title": "item array schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": [],
+    "examples": [
+        [
+            {
+                "id": "1f0bd1db-15a0-49cf-957c-d47788d18d38",
+                "title": "nahkahanskat",
+                "category": "Ulkovaatteet",
+                "location": "tuonela",
+                "images": [
+                    "D2B766BAD180.jpg",
+                    "IMG_2398.png"
+                ],
+                "price": "22322",
+                "dateOfPosting": "2022-01-25",
+                "delivery": {
+                    "shipping": true,
+                    "pickup": false
+                },
+                "seller": {
+                    "firstName": "mansikki",
+                    "lastName": "lehtola",
+                    "email": "mansikki@gmail.com",
+                    "phone": "4343336576767"
+                }
+            }
+        ]
+    ],
+    "items": {
+        "$id": "#/items",
+        "anyOf": [
+            {
+                "$id": "#/items/anyOf/0",
+                "type": "object",
+                "title": "The first anyOf schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": {},
+                "examples": [
+                    {
+                        "id": "1f0bd1db-15a0-49cf-957c-d47788d18d38",
+                        "title": "nahkahanskat",
+                        "category": "Ulkovaatteet",
+                        "location": "tuonela",
+                        "images": [
+                            "D2B766BAD180.jpg",
+                            "IMG_2398.png"
+                        ],
+                        "price": "22322",
+                        "dateOfPosting": "2022-01-25",
+                        "delivery": {
+                            "shipping": true,
+                            "pickup": false
+                        },
+                        "seller": {
+                            "firstName": "mansikki",
+                            "lastName": "lehtola",
+                            "email": "mansikki@gmail.com",
+                            "phone": "4343336576767"
+                        }
+                    }
+                ],
+                "required": [
+                    "id",
+                    "title",
+                    "category",
+                    "location",
+                    "images",
+                    "price",
+                    "dateOfPosting",
+                    "delivery",
+                    "seller"
+                ],
+                "properties": {
+                    "id": {
+                        "$id": "#/items/anyOf/0/properties/id",
+                        "type": "string",
+                        "title": "The id schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "1f0bd1db-15a0-49cf-957c-d47788d18d38"
+                        ]
+                    },
+                    "title": {
+                        "$id": "#/items/anyOf/0/properties/title",
+                        "type": "string",
+                        "title": "The title schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "nahkahanskat"
+                        ]
+                    },
+                    "category": {
+                        "$id": "#/items/anyOf/0/properties/category",
+                        "type": "string",
+                        "title": "The category schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "Ulkovaatteet"
+                        ]
+                    },
+                    "location": {
+                        "$id": "#/items/anyOf/0/properties/location",
+                        "type": "string",
+                        "title": "The location schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "tuonela"
+                        ]
+                    },
+                    "images": {
+                        "$id": "#/items/anyOf/0/properties/images",
+                        "type": "array",
+                        "title": "The images schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": [],
+                        "examples": [
+                            [
+                                "D2B766BAD180.jpg",
+                                "IMG_2398.png"
+                            ]
+                        ],
+                        "maxItems": 4,
+                        "items": {
+                            "$id": "#/items/anyOf/0/properties/images/items",
+                            "anyOf": [
+                                {
+                                    "$id": "#/items/anyOf/0/properties/images/items/anyOf/0",
+                                    "type": "string",
+                                    "title": "The first anyOf schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        "D2B766BAD180.jpg",
+                                        "IMG_2398.png"
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    "price": {
+                        "$id": "#/items/anyOf/0/properties/price",
+                        "type": "string",
+                        "title": "The price schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "22322"
+                        ]
+                    },
+                    "dateOfPosting": {
+                        "$id": "#/items/anyOf/0/properties/dateOfPosting",
+                        "type": "string",
+                        "title": "The dateOfPosting schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "2022-01-25"
+                        ]
+                    },
+                    "delivery": {
+                        "$id": "#/items/anyOf/0/properties/delivery",
+                        "type": "object",
+                        "title": "The delivery schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": {},
+                        "examples": [
+                            {
+                                "shipping": true,
+                                "pickup": false
+                            }
+                        ],
+                        "required": [
+                            "shipping",
+                            "pickup"
+                        ],
+                        "properties": {
+                            "shipping": {
+                                "$id": "#/items/anyOf/0/properties/delivery/properties/shipping",
+                                "type": "boolean",
+                                "title": "The shipping schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": false,
+                                "examples": [
+                                    true
+                                ]
+                            },
+                            "pickup": {
+                                "$id": "#/items/anyOf/0/properties/delivery/properties/pickup",
+                                "type": "boolean",
+                                "title": "The pickup schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": false,
+                                "examples": [
+                                    false
+                                ]
+                            }
+                        },
+                        "additionalProperties": false
+                    },
+                    "seller": {
+                        "$id": "#/items/anyOf/0/properties/seller",
+                        "type": "object",
+                        "title": "The seller schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": {},
+                        "examples": [
+                            {
+                                "firstName": "mansikki",
+                                "lastName": "lehtola",
+                                "email": "mansikki@gmail.com",
+                                "phone": "4343336576767"
+                            }
+                        ],
+                        "required": [
+                            "firstName",
+                            "lastName",
+                            "email",
+                            "phone"
+                        ],
+                        "properties": {
+                            "firstName": {
+                                "$id": "#/items/anyOf/0/properties/seller/properties/firstName",
+                                "type": "string",
+                                "title": "The firstName schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": "",
+                                "examples": [
+                                    "mansikki"
+                                ]
+                            },
+                            "lastName": {
+                                "$id": "#/items/anyOf/0/properties/seller/properties/lastName",
+                                "type": "string",
+                                "title": "The lastName schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": "",
+                                "examples": [
+                                    "lehtola"
+                                ]
+                            },
+                            "email": {
+                                "$id": "#/items/anyOf/0/properties/seller/properties/email",
+                                "type": "string",
+                                "title": "The email schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": "",
+                                "examples": [
+                                    "mansikki@gmail.com"
+                                ]
+                            },
+                            "phone": {
+                                "$id": "#/items/anyOf/0/properties/seller/properties/phone",
+                                "type": "string",
+                                "title": "The phone schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": "",
+                                "examples": [
+                                    "4343336576767"
+                                ]
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                },
+                "additionalProperties": false
+            }
+        ]
+    }
+}
