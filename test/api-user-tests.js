@@ -15,13 +15,13 @@ describe('User tests', function () {
     var token = ""
     var userId = ""
   
-    before(function() {
+    /*before(function() {
       server.start()
     })
   
     after(function () {
       server.close()
-    })
+    })*/
 
     describe('Login - POST /users/login', function() {
         it("should return json web token", function(done) {
