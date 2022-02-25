@@ -71,7 +71,11 @@ passport.use(new basicStrategy(
 ))
 
 const jwt = require('jsonwebtoken')
-const secrets = require('../secrets.json')
+//const secrets = require('../secrets.json')
+const aws = require('aws-sdk');
+let s3 = new aws.S3({
+    jwtSignKey: process.env.jwtSignKey
+  })
 
 router.post('/login', passport.authenticate("basic", {session: false}), (req, res) => {
     // generate and return JWT upon succesful login
@@ -79,7 +83,7 @@ router.post('/login', passport.authenticate("basic", {session: false}), (req, re
     const payloadData = {
         userId: req.user.id
     }
-    const token = jwt.sign(payloadData, secrets.jwtSignKey)
+    const token = jwt.sign(payloadData, s3.jwtSignKey)
 
     res.json({token: token})
 })
