@@ -7,7 +7,7 @@ const chaiJsonSchemaAjv = require('chai-json-schema-ajv')
 chai.use(chaiJsonSchemaAjv)
 const { assert } = require('chai')
 
-const serverAddress = "http://localhost:8080"
+const serverAddress = "https://bci-graded-exc.herokuapp.com"
 const userInfoArraySchema = require('../schemas/userArray.schema.json')
 const userInfoSchema = require('../schemas/user.schema.json')
 
