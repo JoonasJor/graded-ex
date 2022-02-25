@@ -16,14 +16,14 @@ describe('Item tests', function () {
     var token = ""
     var itemId = ""
 
-    before(function() {
+    /*before(function() {
         server.start()
         console.log(token)
     })
 
     after(function () {
         server.close()
-    })
+    })*/
 
     describe('Get all items - GET /items', function() {
         it("should return all item data", function(done) {
