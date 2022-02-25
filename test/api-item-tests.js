@@ -44,6 +44,22 @@ describe('Item tests', function () {
         })
     })
 
+    describe('Get queried items - GET /items', function() {
+        it("should return queried item data", function(done) {
+        // send http request
+        chai.request(serverAddress)
+            .get('/items?category=Polkupyörät&&?location=Oulu&&dateOfPosting=2022-01-20')
+            .end(function (err, res) {
+                expect(err).to.be.null 
+                expect(res.statusCode).to.equal(200)      
+                expect(res.body).to.be.jsonSchema(itemInfoArraySchema)
+
+                console.log(res.body)       
+                done()
+            })
+        })
+    })
+
     describe('Get single item - GET /item/:id', function() {
         it("should return item data", function(done) {
         // send http request
