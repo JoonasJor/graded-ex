@@ -48,7 +48,7 @@ describe('Item tests', function () {
         it("should return queried item data", function(done) {
         // send http request
         chai.request(serverAddress)
-            .get('/items?category=Polkupyörät&&?location=Oulu&&dateOfPosting=2022-01-20')
+            .get('/items?category=Polkupyörät&location=Oulu&dateOfPosting=2022-01-20')
             .end(function (err, res) {
                 expect(err).to.be.null 
                 expect(res.statusCode).to.equal(200)      
