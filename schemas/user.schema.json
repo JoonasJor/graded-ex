@@ -1,17 +1,18 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "http://example.com/example.json",
+    "$id": "http://localhost/user.json",
     "type": "object",
-    "title": "The root schema",
+    "title": "user schema",
     "description": "The root schema comprises the entire JSON document.",
     "default": {},
     "examples": [
         {
-            "firstName": "Paavo",
-            "lastName": "Pesusieni",
-            "email": "sieni@gmail.com",
-            "phoneNumber": "0441234567",
-            "password": "paavosieni68"
+            "id": "fd946945-5e98-4f1e-a14a-6753923156c9",
+            "firstName": "Matti",
+            "lastName": "Muoniola",
+            "email": "matt@gmail.com",
+            "phoneNumber": "0447456123",
+            "password": "maunulankukkasadot"
         }
     ],
     "required": [
@@ -22,6 +23,16 @@
         "password"
     ],
     "properties": {
+        "id": {
+            "$id": "#/properties/id",
+            "type": "string",
+            "title": "The id schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                "fd946945-5e98-4f1e-a14a-6753923156c9"
+            ]
+        },
         "firstName": {
             "$id": "#/properties/firstName",
             "type": "string",
@@ -29,7 +40,7 @@
             "description": "An explanation about the purpose of this instance.",
             "default": "",
             "examples": [
-                "Paavo"
+                "Matti"
             ]
         },
         "lastName": {
@@ -39,7 +50,7 @@
             "description": "An explanation about the purpose of this instance.",
             "default": "",
             "examples": [
-                "Pesusieni"
+                "Muoniola"
             ]
         },
         "email": {
@@ -49,7 +60,7 @@
             "description": "An explanation about the purpose of this instance.",
             "default": "",
             "examples": [
-                "sieni@gmail.com"
+                "matt@gmail.com"
             ]
         },
         "phoneNumber": {
@@ -59,7 +70,7 @@
             "description": "An explanation about the purpose of this instance.",
             "default": "",
             "examples": [
-                "0441234567"
+                "0447456123"
             ]
         },
         "password": {
@@ -69,7 +80,7 @@
             "description": "An explanation about the purpose of this instance.",
             "default": "",
             "examples": [
-                "paavosieni68"
+                "maunulankukkasadot"
             ]
         }
     },
