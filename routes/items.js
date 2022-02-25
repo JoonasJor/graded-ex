@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require('uuid')
 const items = require('../data/items-data')
 const users = require('../data/users-data')
 
-const secrets = require('../secrets.json')
+//const secrets = require('../secrets.json')
 const passport = require("passport")
 const JwtStrategy = require('passport-jwt').Strategy,
       ExtractJwt = require('passport-jwt').ExtractJwt
@@ -107,11 +107,11 @@ const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const multer = require('multer')
 
-cloudinary.config({ 
+/*cloudinary.config({ 
     cloud_name: secrets.cloud_name, 
     api_key: secrets.api_key, 
     api_secret: secrets.api_secret,
-})
+})*/
 
 // Config cloudinary storage for multer-storage-cloudinary
 const storage = new CloudinaryStorage({
